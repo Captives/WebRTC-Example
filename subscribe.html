@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订阅视频直播</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+
+    <link href="lib/videojs/video-js.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="padding-top: 20px">
+    <!-- <iframe src="nav.html" width="100%" height="100px" style="border:#fff 0"></iframe>-->
+    <div class="panel">
+        <header class="panel-heading custom-tab turquoise-tab" style="color: #FFFFFF">
+            <i class="fa fa-home"></i> Flash视频发布(rtmp)
+        </header>
+        <div class="panel-body" style="background: #CDCDCD; text-align: center">
+            <div class="row" style="text-align: left;">
+                <div class="col-sm-4 form-group has-success">
+                    <label class="control-label" for="iptAddr">服务器地址</label>
+                    <input type="text" class="form-control input-sm" id="iptAddr">
+                </div>
+
+                <div class="col-sm-2 form-group has-success">
+                    <label class="control-label" for="iptSName">流名称</label>
+                    <input class="form-control input-sm" type="text" id="iptSName">
+                </div>
+                <div class="col-sm-3">
+
+                </div>
+                <div class="col-sm-3">
+                    <ul class="pagination" style="display: inline;margin-right: 50px; ">
+                        <li value="rtmp"><a href="#">RTMP</a></li>
+                        <li class="active" value="rtc"><a href="#">WebRTC</a></li>
+                        <li value="hls"><a href="#">HLS</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--视频区域-->
+            <div id="video-container" class="clearfix">
+                <video id="red5pro-subscriber" width="720" height="480" autoplay muted></video>
+            </div>
+            <!---->
+            <div class="btn">
+                <button id="startBtn" class="btn btn-info btn-sm" type="button"><i class="fa fa-play"></i> 播放视频
+                </button>
+                <button id="stopBtn" class="btn btn-danger btn-sm" type="button"><i class="fa fa-stop"></i> 停止发布
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- base videojs -->
+<script src="lib/videojs/video.min.js"></script>
+<script src="lib/videojs/videojs-media-sources.min.js"></script>
+<!-- HLS support -->
+<script src="lib/videojs/videojs.hls.min.js"></script>
+<!-- WebRTC Shim -->
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+<script src="lib/red5pro/red5pro-sdk.js"></script>
+
+<script type="text/javascript" src="js/subscribe.js"></script>
+<script type="text/javascript" src="js/subscribe-main.js"></script>
+</body>
+</html>
