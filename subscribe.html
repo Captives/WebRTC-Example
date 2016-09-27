@@ -6,7 +6,6 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet">
-
     <link href="lib/videojs/video-js.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,46 +13,60 @@
 <div class="container" style="padding-top: 20px">
     <!-- <iframe src="nav.html" width="100%" height="100px" style="border:#fff 0"></iframe>-->
     <div class="panel">
-        <header class="panel-heading custom-tab turquoise-tab" style="color: #FFFFFF">
-            <i class="fa fa-home"></i> Flash视频发布(rtmp)
+        <header class="panel-heading custom-tab turquoise-tab" style="color: #FFFFFF;font-size:20px;">
+            <i class="fa fa-youtube-play"></i> 订阅视频
+            <span id="conBtn" class="label label-success label-mini pull-right">调试</span>
         </header>
+
         <div class="panel-body" style="background: #CDCDCD; text-align: center">
-            <div class="row" style="text-align: left;">
-                <div class="col-sm-4 form-group has-success">
-                    <label class="control-label" for="iptAddr">服务器地址</label>
-                    <input type="text" class="form-control input-sm" id="iptAddr">
-                </div>
-
-                <div class="col-sm-2 form-group has-success">
-                    <label class="control-label" for="iptSName">流名称</label>
-                    <input class="form-control input-sm" type="text" id="iptSName">
-                </div>
-                <div class="col-sm-3">
-
-                </div>
-                <div class="col-sm-3">
-                    <ul class="pagination" style="display: inline;margin-right: 50px; ">
-                        <li value="rtmp"><a href="#">RTMP</a></li>
-                        <li class="active" value="rtc"><a href="#">WebRTC</a></li>
-                        <li value="hls"><a href="#">HLS</a></li>
+            <!--视频和配置区域-->
+            <div class="col-md-6 panel">
+                <div class="panel-body">
+                    <ul class="p-info">
+                        <li>
+                            <div class="title">server url</div>
+                            <div id="surl" class="desk">192.168.22.5</div>
+                        </li>
+                        <li>
+                            <div class="title">channel name</div>
+                            <div id="schannel" class="desk"> TD001 </div>
+                        </li>
+                        <li>
+                            <div class="title">stream name</div>
+                            <div id="sname" class="desk"> live001 </div>
+                        </li>
                     </ul>
                 </div>
             </div>
+            <div class="col-md-6 btn">
+                <ul class="pagination" style="display: inline;margin-right: 50px; ">
+                    <li value="rtmp"><a href="#">RTMP</a></li>
+                    <li value="rtc" class="active"><a href="#">WebRTC</a></li>
+                    <li value="hls"><a href="#">HLS</a></li>
+                </ul>
 
-            <!--视频区域-->
-            <div id="video-container" class="clearfix">
-                <video id="red5pro-subscriber" width="720" height="480" autoplay muted></video>
-            </div>
-            <!---->
-            <div class="btn">
                 <button id="startBtn" class="btn btn-info btn-sm" type="button"><i class="fa fa-play"></i> 播放视频
                 </button>
                 <button id="stopBtn" class="btn btn-danger btn-sm" type="button"><i class="fa fa-stop"></i> 停止发布
                 </button>
             </div>
+
+            <!--视频区域-->
+            <div id="video-container" class="col-md-12 clearfix">
+                <video id="red5pro-subscriber" width="720" height="480" autoplay muted></video>
+            </div>
         </div>
     </div>
 </div>
+
+<!--控制台调试-->
+<div class="navbar-fixed-bottom console-box" style="position: fixed;color: #FFF">
+    <label class="control-label" for="console">Console</label><br><br>
+    <div id="console" class="col-md-12 democonsole" style="width:100%; max-height: 300px;overflow:auto; ">
+        <ul></ul>
+    </div>
+</div>
+
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
@@ -64,6 +77,7 @@
 <script src="lib/videojs/videojs.hls.min.js"></script>
 <!-- WebRTC Shim -->
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="js/common.js" type="text/javascript"></script>
 
 <script src="lib/red5pro/red5pro-sdk.js"></script>
 

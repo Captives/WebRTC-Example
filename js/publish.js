@@ -1,7 +1,5 @@
 var Red5Pro = null;
 function PublisherUtils(app, sdk){
-    $('#stopBtn').click(this.stop);
-    this.$startBtn = $('#startBtn');
     this.publisher = undefined;
     this.app = app;
     Red5Pro = sdk;

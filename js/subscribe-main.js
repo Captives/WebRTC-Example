@@ -19,18 +19,48 @@ this.publisherLog = function (message) {
 };
 
 $(document).ready(function (e) {
-    var view = window.query('view');
+    console = new Console('console', console);
+    view = window.query('view');
+
+    $("#surl").text(localStorage.getItem('url'));
+    $("#schannel").text(localStorage.getItem('channel'));
+    $("#sname").text(localStorage.getItem('streamName'));
+
     $('.pagination > li[value="' + view + '"]').addClass('active').siblings().removeClass('active');
     $('.pagination > li').click(function () {
         $(this).addClass('active').siblings().removeClass('active');
+        window.location.href = window.location.href.replace(window.location.search,"")+"?view="+$(this).attr('value');
     });
 
-    var util = new SubscriberUtils('live', red5prosdk);
+    util = new SubscriberUtils('live', red5prosdk);
+});
+
+var view = null;
+var util = null;
+$('#startBtn').click(function (e) {
+    var streamName = localStorage.getItem('streamName') || "publisher1";
+    var channel = localStorage.getItem('channel') || undefined;
+    var url = localStorage.getItem('url') || 'localhost';
+
     if (view == 'rtmp') {
-        util.rtmpListen("rtmp", "192.168.22.5", 1935, null, 'publisher1');
+        util.rtmpListen("rtmp", url, 1935, channel, streamName);
     } else if (view == 'rtc') {
-        util.rtcListen("ws", "192.168.22.5", "8081", null, 'publisher1');
+        util.rtcListen("ws", url, 8081, channel, streamName);
     } else if(view == 'hls'){
-        util.hlsListen("http", "192.168.22.5", "5080", null, 'publisher1');
+        util.hlsListen("http", url, 5080, channel, streamName);
+    }
+});
+
+$('#stopBtn').click(function(e){
+
+});
+
+$('#conBtn').click(function (e) {
+    if($(this).hasClass('label-success')){
+        $(this).removeClass('label-success').addClass('label-danger').text('关闭');
+        $('.console-box').show();
+    }else{
+        $(this).removeClass('label-danger').addClass('label-success').text('调试');
+        $('.console-box').hide();
     }
 });

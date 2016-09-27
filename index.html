@@ -12,16 +12,42 @@
 </head>
 <body>
 <div class="container">
-    <div style="height: 50px" class="col-md-12"></div>
-  <!--  <iframe src="nav.html" width="100%" height="100px" style="border:#fff 0"></iframe>-->
+
+    <div class="panel green-box twt-info" style="margin-top: 30px;padding-top: 20px;">
+        <div class="panel-body">
+            <!--<h3>视频直播</h3>-->
+            <div class="col-sm-4 form-group  has-success">
+                <label class="col-md-2 col-sm-3">URL</label>
+                <div class="col-md-10 col-sm-9">
+                    <input id="urlIpt" type="text" placeholder="192.168.22.5" class="form-control input-sm">
+                </div>
+            </div>
+
+            <div class="col-sm-4  form-group  has-success">
+                <label class="col-md-3 col-sm-4">Channel</label>
+                <div class="col-md-9 col-sm-8">
+                    <input id="channelIpt" type="text" placeholder="TD001" class="form-control input-sm">
+                </div>
+            </div>
+
+            <div class="col-sm-4  form-group  has-success">
+                <label class="col-md-4 col-sm-6">StreamName</label>
+                <div class="col-md-8 col-sm-6">
+                    <input id="snameIpt" type="text" placeholder="streamName" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  <iframe src="nav.html" width="100%" height="100px" style="border:#fff 0"></iframe>-->
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="panel">
                 <div class="panel-body">
                     <div class="calendar-block ">
-                        <div class="cal1">
+                        <div class="cal1" style="max-width: 100%">
                             <div class="clndr">
-                                <div class="clndr-controls" style="color: #FFFFFF;">
+                                <div class="clndr-controls">
                                     <div class="clndr-control-button">
                                         <span class="clndr-previous-button">
                                             <i class="fa fa-chevron-left"></i>
@@ -174,7 +200,7 @@
         </div>
 
         <!--发布视频-->
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="panel">
                 <div class="panel-body">
                     <div class="media usr-info">
@@ -243,15 +269,26 @@
 
 <script type="application/javascript">
     $(document).ready(function () {
+        $('#urlIpt').val(window.location.hostname);
+        $('#channelIpt').val('TD0001');
+        $('#snameIpt').val('live001');
         $('#pub > li').click(function (e) {
-           console.log($(this).attr('name'));
+           getServer();
            window.open("publish.html?view="+$(this).attr('name'));//'channelmode=yes,width=1200,height=726'
         });
 
         $('#sub > li').click(function (e) {
-            console.log($(this).attr('name'));
-            window.open("subscribe.html?view="+$(this).attr('name'),null,'channelmode=yes,width=1200,height=726');
+            getServer();
+            window.open("subscribe.html?view="+$(this).attr('name'));//'channelmode=yes,width=1200,height=726'
         });
+
+        function getServer(){
+            var data = {url:$('#urlIpt').val(), channel:$('#channelIpt').val(), streamName:$('#snameIpt').val()}
+            localStorage.setItem('url', $('#urlIpt').val());
+            localStorage.setItem('channel', $('#channelIpt').val());
+            localStorage.setItem('streamName', $('#snameIpt').val());
+            console.log(Date.now(), localStorage.getItem('url'), localStorage.getItem('channel'), localStorage.getItem('streamName'));
+        }
     });
 </script>
 </body>

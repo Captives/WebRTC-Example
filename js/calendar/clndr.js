@@ -23,18 +23,26 @@
 
   // This is the default calendar template. This can be overridden.
   var clndrTemplate = "<div class='clndr-controls'>" +
-    "<div class='clndr-control-button'><span class='clndr-previous-button'><i class='fa fa-chevron-left'></i></span></div><div class='month'><span><%= month %></span> <%= year %></div><div class='clndr-control-button leftalign'><span class='clndr-next-button'><i class='fa fa-chevron-right'></i></span></div>" +
-    "</div>" +
-  "<table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>" +
-    "<thead>" +
-    "<tr class='header-days'>" +
-    "<% for(var i = 0; i < daysOfTheWeek.length; i++) { %>" +
+      "<div class='clndr-control-button'>" +
+      "<span class='clndr-previous-button'>" +
+      "<i class='fa fa-chevron-left'></i></span>" +
+      "</div><div class='month'><span>" +
+      "<%= month %></span> <%= year %>" +
+      "</div><div class='clndr-control-button leftalign'>" +
+      "<span class='clndr-next-button'>" +
+      "<i class='fa fa-chevron-right'></i>" +
+      "</span></div>" +
+      "</div>" +
+      "<table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>" +
+      "<thead>" +
+      "<tr class='header-days'>" +
+      "<% for(var i = 0; i < daysOfTheWeek.length; i++) { %>" +
       "<td class='header-day'><%= daysOfTheWeek[i] %></td>" +
-    "<% } %>" +
-    "</tr>" +
-    "</thead>" +
-    "<tbody>" +
-    "<% for(var i = 0; i < numberOfRows; i++){ %>" +
+      "<% } %>" +
+      "</tr>" +
+      "</thead>" +
+      "<tbody>" +
+      "<% for(var i = 0; i < numberOfRows; i++){ %>" +
       "<tr>" +
       "<% for(var j = 0; j < 7; j++){ %>" +
       "<% var d = j + i * 7; %>" +
@@ -42,9 +50,9 @@
       "</div></td>" +
       "<% } %>" +
       "</tr>" +
-    "<% } %>" +
-    "</tbody>" +
-  "</table>";
+      "<% } %>" +
+      "</tbody>" +
+      "</table>";
 
   var pluginName = 'clndr';
 

@@ -12,28 +12,32 @@
 <div class="container" style="padding-top: 20px">
     <!-- <iframe src="nav.html" width="100%" height="100px" style="border:#fff 0"></iframe>-->
     <div class="panel">
-        <header class="panel-heading custom-tab turquoise-tab" style="color: #FFFFFF">
-            <i class="fa fa-home"></i> Flash视频发布(rtmp)
+        <header class="panel-heading custom-tab turquoise-tab" style="color: #FFFFFF;font-size:20px;">
+            <i class="fa fa-video-camera"></i> 视频发布
+            <span id="conBtn" class="label label-success label-mini pull-right">调试</span>
         </header>
         <div class="panel-body" style="background: #CDCDCD; text-align: center">
-            <div class="row" style="text-align: left;">
-                <div class="col-sm-4 form-group has-success">
-                    <label class="control-label" for="iptAddr">服务器地址</label>
-                    <input type="text" class="form-control input-sm" id="iptAddr">
-                </div>
-
-                <div class="col-sm-2 form-group has-success">
-                    <label class="control-label" for="iptSName">流名称</label>
-                    <input class="form-control input-sm" type="text" id="iptSName">
+            <!--视频和配置区域-->
+            <div class="col-md-6 panel">
+                <div class="panel-body">
+                    <ul class="p-info">
+                        <li>
+                            <div class="title">server url</div>
+                            <div id="surl" class="desk">192.168.22.5</div>
+                        </li>
+                        <li>
+                            <div class="title">channel name</div>
+                            <div id="schannel" class="desk"> TD001 </div>
+                        </li>
+                        <li>
+                            <div class="title">stream name</div>
+                            <div id="sname" class="desk"> live001 </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <!--视频区域-->
-            <div id="video-container" class="clearfix">
-                <video id="red5pro-publisher" width="720" height="480" autoplay muted></video>
-            </div>
-            <!---->
-            <div class="btn">
+            <div class="col-md-6 btn">
                 <ul class="pagination" style="display: inline;margin-right: 50px; ">
                     <li value="rtmp"><a href="#">RTMP</a></li>
                     <li class="active" value="rtc"><a href="#">WebRTC</a></li>
@@ -43,13 +47,29 @@
                 <button id="stopBtn" class="btn btn-danger btn-sm" type="button"><i class="fa fa-stop"></i> 停止发布
                 </button>
             </div>
+
+            <!--视频区域-->
+            <div id="video-container" class="col-sm-12 clearfix">
+                <video id="red5pro-publisher" width="720" height="480" autoplay muted></video>
+            </div>
         </div>
     </div>
 </div>
+
+<!--控制台调试-->
+<div class="navbar-fixed-bottom console-box" style="position: fixed;color: #FFF;">
+    <label class="control-label" for="console">Console</label><br><br>
+    <div id="console" class="col-md-12 democonsole" style="width:100%; max-height: 300px;overflow:auto; ">
+        <ul></ul>
+    </div>
+</div>
+
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<!--<script type="text/javascript" src="css/demo-console/index.js"></script>-->
 
-<script src="lib/red5pro/red5pro-sdk.js"></script>
+<script type="text/javascript" src="lib/red5pro/red5pro-sdk.js"></script>
 
 <script type="text/javascript" src="js/publish.js"></script>
 <script type="text/javascript" src="js/publish-main.js"></script>

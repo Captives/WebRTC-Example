@@ -18,19 +18,46 @@ this.publisherLog = function (message) {
     console.log('[PublisherSWF] ' + message);
 };
 
+var view = null;
+var util = null;
 $(document).ready(function (e) {
-    var view = window.query('view');
+    console = new Console('console', console);
+
+    view = window.query('view');
+    $("#surl").text(localStorage.getItem('url'));
+    $("#schannel").text(localStorage.getItem('channel'));
+    $("#sname").text(localStorage.getItem('streamName'));
+
+    util = new PublisherUtils('live', red5prosdk);
     $('.pagination > li[value="' + view + '"]').addClass('active').siblings().removeClass('active');
     $('.pagination > li').click(function () {
         $(this).addClass('active').siblings().removeClass('active');
+        window.location.href = window.location.href.replace(window.location.search,"")+"?view="+$(this).attr('value');
     });
+});
 
-    var util = new PublisherUtils('live', red5prosdk);
+$('#startBtn').click(function (e) {
+    var streamName = localStorage.getItem('streamName') || "publisher1";
+    var channel = localStorage.getItem('channel') || undefined;
+    var url = localStorage.getItem('url') || 'localhost';
     if (view == 'rtmp') {
-        util.rtmpListen("rtmp", "192.168.22.5", 1935, null, 'publisher1');
-        // util.rtcUnPublish();
+        util.rtmpListen("rtmp", url, 1935, channel, streamName);
     } else if (view == 'rtc') {
-        util.rtcListen("ws", "192.168.22.5", "8081", null, 'publisher1');
-        // util.unpublish();
+        util.rtcListen("ws", url, "8081", channel, streamName);
+    }
+});
+
+$('#stopBtn').click(function(e){
+    util.rtcUnPublish();
+});
+
+
+$('#conBtn').click(function (e) {
+    if($(this).hasClass('label-success')){
+        $(this).removeClass('label-success').addClass('label-danger').text('关闭');
+        $('.console-box').show();
+    }else{
+        $(this).removeClass('label-danger').addClass('label-success').text('调试');
+        $('.console-box').hide();
     }
 });
